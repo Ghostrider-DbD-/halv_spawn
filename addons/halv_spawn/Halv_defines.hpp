@@ -556,6 +556,14 @@ class HALV_RscMapControl
 		coefMax = 1;
 		color[] = {0, 0, 0, 1};
 	};
+	class LineMarker
+	{
+		lineDistanceMin = 3e-005;
+		lineLengthMin = 2;
+		lineWidthThick = 0.013;
+		lineWidthThin = 0.005;
+		textureComboBoxColor = "#(argb,8,8,3)color(1,1,1,1)";
+	};
 };
 
 class HALV_CT_TREE
@@ -601,4 +609,10 @@ class HALV_CT_TREE
 	};
 	colorDisabled[] = {0,0,0,0}; // Does nothing, but must be present, otherwise an error is shown
 	colorArrow[] = {0,0,0,0}; // Does nothing, but must be present, otherwise an error is shown
+	colorPicture[] = {0,0,0,0.4};
+	colorPictureSelected[] = {0,0,0,0.4};
+	colorPictureDisabled[] = {0,0,0,0.4};
+	colorPictureRight[] = {0,0,0,0.4};
+	colorPictureRightSelected[] = {0,0,0,0.4};
+	colorPictureRightDisabled[] = {0,0,0,0.4};	
 };

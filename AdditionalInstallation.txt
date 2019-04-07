@@ -1,0 +1,22 @@
+In order to use the spawn booths introduced with Epoch 1.3, you must make the following change 
+(Credit to Grahamme for this work: https://epochmod.com/forum/topic/34896-custom-spawn-dialog-with-gear-halo-selection-moving-map-credits-custom-spawns-and-more/page/30/)
+
+replace the contents of epoch_code/compile/EPOCH_EnterBuilding.sqf with this:
+
+/*
+	Author: Aaron Clark - EpochMod.com
+
+    Contributors:
+
+	Description:
+	Epoch request teleport
+
+    Licence:
+    Arma Public License Share Alike (APL-SA) - https://www.bistudio.com/community/licenses/arma-public-license-share-alike
+
+    Github:
+    https://github.com/EpochModTeam/Epoch/tree/release/Sources/epoch_code/compile/EPOCH_EnterBuilding.sqf
+*/
+if !(isNull _this) then{
+	//[player,_this,Epoch_personalToken] remoteExec ["EPOCH_server_teleportPlayer",2];
+	[] execVM "addons\halv_spawn\opendialog.sqf";

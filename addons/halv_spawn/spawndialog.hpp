@@ -45,6 +45,7 @@ class Halv_spawn_dialog
 			y = 0.137091 * safezoneH + safezoneY;
 			w = 0.438144 * safezoneW;
 			h = 0.725818 * safezoneH;
+
 		};
 		class HALV_spawn_map: HALV_RscMapControl
 		{
@@ -54,6 +55,8 @@ class Halv_spawn_dialog
 			y = 0.137091 * safezoneH + safezoneY;
 			w = 0.438144 * safezoneW;
 			h = 0.725818 * safezoneH;
+			widthRailWay = 1;			
+
 		};
 		class HALV_spawn_listboxframe: HALV_RscFrame
 		{
@@ -96,9 +99,9 @@ class Halv_spawn_dialog
 			y = 0.137091 * safezoneH + safezoneY;
 			w = 0.0824742 * safezoneW;
 			h = 0.043989 * safezoneH;
-//\A3\Air_F_Beta\Parachute_01\Data\UI\Portrait_Parachute_01_CA.paa
+			//\A3\Air_F_Beta\Parachute_01\Data\UI\Portrait_Parachute_01_CA.paa
 			strings[] = {"$STR_HALV_HALO"};
-//\a3\soft_f_beta\Truck_01\Data\UI\Truck_01_covered_CA.paa
+			//\a3\soft_f_beta\Truck_01\Data\UI\Truck_01_covered_CA.paa
 			checked_strings[] = {"$STR_HALV_GROUND"};
 			onCheckBoxesSelChanged = "if(_this select 2 == 0)then{HALV_HALO = true;systemChat localize ""STR_HALV_HALO_SELECTED"";}else{HALV_HALO = false;systemChat localize ""STR_HALV_GROUND_SELECTED"";};false";
 			tooltip = "$STR_HALV_PRESSSELECT_HALO_OR_GROUND";
@@ -136,6 +139,8 @@ class Halv_spawn_dialog
 			h = 0.725818 * safezoneH;
 			onTreeDblClick = "_this call Halv_ontreedoubleclick; false";
 			onTreeSelChanged = "_this call Halv_ontreeselected; false";
+			// Added for Arma 1.60
+			pictureColor[] = {0,0,0,0}; //no color
 		};
 	};
 };

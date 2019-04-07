@@ -17,7 +17,7 @@ if(isServer)then{
 
 //if _deletedefaultteleporters is true, it deletes all default teleporter objects and replaces them with new ones forcing players to select spawn from the dialog
 //if you want to use the default teleporters instead, set this to false ... however the default teleporters will always have the default teleport scroll action attached
-	_deletedefaultteleporters = true;
+	_deletedefaultteleporters = false;
 //new teleporter object, this is if you want a diffrent object than the default console i set
 	_newteleClass = "Land_InfoStand_V2_F";
 //set object texture (full path), also accepts colour defs like "#(argb,8,8,3)color(0.123,1,0.3,0.3)", "" for nothing/default
@@ -122,7 +122,7 @@ if(isServer)then{
 	}forEach _alltextures;
 	HALV_senddeftele = [_teleobjs,_deftelepos];
 	publicVariable "HALV_senddeftele";
-	diag_log format["[halv_spawn] sendt teleporters and default positions to clients, %1 textures build",_pics];
+	diag_log format["[halv_spawn] send teleporters and default positions to clients, %1 textures build",_pics];
 };
 
 if(hasInterface && !isDedicated)then{

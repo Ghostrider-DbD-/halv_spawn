@@ -10,13 +10,13 @@ _scriptpath = _this select 0;
 _rspawnw = getMarkerPos "respawn_west";
 _HALV_Center = getMarkerPos "center";
 // Makes the script start when player is ingame
-waitUntil{!isNil "Epoch_my_GroupUID"};
 waitUntil{!isNil "HALV_senddeftele"};
+waitUntil{!isNil "Epoch_my_GroupUID"};
 
 //exit if player is not near a spawn
-if(player distance _rspawnw > 35)exitWith{Halv_moveMap = nil;Halv_fill_spawn = nil;Halv_near_cityname = nil;Halv_spawn_player = nil;Halv_spawns = nil;HALV_senddeftele = nil;HALV_HALO = nil;HALV_SELECTSPAWN = nil;HALV_fill_gear = nil;HALV_fnc_returnnameandpic = nil;HALV_fill_gear = nil;Halv_ontreedoubleclick = nil;Halv_ontreeselected = nil;HALV_GEAR_TOADD = nil;HALV_player_removelisteditem = nil;HALV_addiweaponwithammo = nil;HALV_fnc_halo = nil;HALV_playeraddcolours = nil;diag_log "Spawn Menu Aborted...";};
-diag_log format["[halv_spawn] waiting for new teleports to be build in %1 ...",worldName];
-{_x addAction [format["<img size='1.5'image='\a3\Ui_f\data\IGUI\Cfg\Actions\ico_cpt_start_on_ca.paa'/> <t color='#0096ff'>%1</t><t > </t><t color='#00CC00'>%2</t>",localize "STR_HALV_SCROLL_SELECT",localize "STR_HALV_SCROLL_SPAWN"],(_scriptpath+"opendialog.sqf"),_x, -9, true, true, "", "player distance _target < 5"];}forEach (HALV_senddeftele select 0);
+if(player distance _rspawnw > 35)exitWith{Halv_moveMap = nil;Halv_fill_spawn = nil;Halv_near_cityname = nil;Halv_spawn_player = nil;Halv_spawns = nil;HALV_Center = nil;HALV_senddeftele = nil;HALV_HALO = nil;HALV_SELECTSPAWN = nil;HALV_fill_gear = nil;HALV_fnc_returnnameandpic = nil;HALV_fill_gear = nil;Halv_ontreedoubleclick = nil;Halv_ontreeselected = nil;HALV_GEAR_TOADD = nil;HALV_player_removelisteditem = nil;HALV_addiweaponwithammo = nil;HALV_fnc_halo = nil;HALV_playeraddcolours = nil;diag_log "Spawn Menu Aborted...";};
+//diag_log format["[halv_spawn] waiting for new teleports to be build in %1 ...",worldName];
+//{_x addAction ["<img size='1.5'image='\a3\Ui_f\data\IGUI\Cfg\Actions\ico_cpt_start_on_ca.paa'/> <t color='#0096ff'>Select</t><t > </t><t color='#00CC00'>Spawn</t>",(_scriptpath+"opendialog.sqf"),_x, -9, true, true, "", "player distance _target < 5"];}forEach (HALV_senddeftele select 0);
 diag_log format["[halv_spawn] addAction added to %1",HALV_senddeftele];
 waitUntil {!dialog};
 
@@ -96,13 +96,13 @@ if(_adddefaultspawns)then{
 	}forEach (HALV_senddeftele select 1);
 };
 
-_string = "
+Halv_moveMap = {
 	disableSerialization;
 	_lb = _this select 0;
 	_index = _this select 1;
 	_value = _lb lbValue _index;
 	_zoom = 1;
-	_spawn = "+(str _HALV_Center)+";
+	_spawn = HALV_Center;
 	if !(_value in [-1,-2,-3]) then {
 		_spawn = (Halv_spawns select _value)select 0;
 		_zoom = .15;
@@ -111,14 +111,14 @@ _string = "
 	ctrlMapAnimClear _ctrl;
 	_ctrl ctrlMapAnimAdd [1,_zoom,_spawn];
 	ctrlMapAnimCommit _ctrl;
-";
-Halv_moveMap = compile _string;
+};
 
-_string = "
-	_ammo = [] + getArray (configFile >> 'cfgWeapons' >> _this >> 'magazines');
+HALV_addiweaponwithammo = {
+	#include "spawn_gear_settings.sqf";
+	_ammo = [] + getArray (configFile >> "cfgWeapons" >> _this >> "magazines");
 	if (count _ammo > 0) then {
-		_ammoamount = if(_this in ("+(str((_geararr select 1) select 0))+"))then{"+(str((_geararr select 1) select 1))+"}else{"+(str((_geararr select 0) select 1))+"};
-		for '_i' from 1 to _ammoamount do {
+		_ammoamount = if(_this in ((_geararr select 1) select 0))then{((_geararr select 1) select 1)}else{((_geararr select 0) select 1)};
+		for "_i" from 1 to _ammoamount do {
 			_rnd = _ammo select 0;
 			player addMagazine _rnd;
 		};
@@ -126,8 +126,7 @@ _string = "
 	player addWeapon _this;
 	player selectWeapon _this;
 	reload player;
-";
-HALV_addiweaponwithammo = compile _string;
+};
 
 HALV_fnc_halo = {
 	waitUntil{animationState player == "halofreefall_non"};
@@ -180,13 +179,14 @@ HALV_fnc_halo = {
 };
 
 HALV_playeraddcolours = {
-	_pcolor = profileNamespace getVariable ["HALV_BAGCOLOR",[]];
+	_pname = format["%1_BAGCOLOR",_this];
+	_pcolor = profileNamespace getVariable [_pname,[]];
 	if (!(_pcolor isEqualTo []) && !(Backpack player in ["","B_Parachute","B_O_Parachute_02_F","B_I_Parachute_02_F","B_B_Parachute_02_F"]))then{
 		_bag = (unitBackpack player);
 		if(count(getObjectTextures _bag) > 0)then{
 			_defaultsides = [];
 			{
-				if (_x != "")then{
+				if !(_x isEqualTo "")then{
 					_defaultsides pushBack [_forEachIndex,_x];
 				};
 			}forEach getObjectTextures _bag;
@@ -199,12 +199,13 @@ HALV_playeraddcolours = {
 		};
 	};
 
-	_pcolor = profileNamespace getVariable ["HALV_UNIFORMCOLOR",[]];
+	_pname = format["%1_UNIFORMCOLOR",_this];
+	_pcolor = profileNamespace getVariable [_pname,[]];
 	if (!(_pcolor isEqualTo []) && !(Uniform player in ["","U_Test1_uniform","U_Test_uniform"]))then{
 		if(count(getObjectTextures player) > 0)then{
 			_defaultsides = [];
 			{
-				if (_x != "")then{
+				if !(_x isEqualTo "")then{
 					_defaultsides pushBack [_forEachIndex,_x];
 				};
 			}forEach getObjectTextures player;
@@ -269,7 +270,7 @@ Halv_spawn_player = {
 			player addgoggles ((HALV_GEAR_TOADD select 8)select 0);
 			(_addedgear select 8) pushBack ((HALV_GEAR_TOADD select 8)select 0);
 		};
-		_sel = if((typeOf player) == "Epoch_Female_F")then{1}else{0};
+		_sel = if((typeOf player) isEqualTo "Epoch_Female_F")then{1}else{0};
 		if(count (HALV_GEAR_TOADD select 7) < 1)then{
 			_item = ((_geararr select 7) select _sel) call BIS_fnc_selectRandom;
 			player forceAddUniform _item;
@@ -422,9 +423,9 @@ Halv_spawn_player = {
 		player setPos _position;
 		titleText[format[localize "STR_HALV_SPAWNEDNEAR",_cityname,name player],"PLAIN DOWN"];
 	};
-	if (_script != "")then{execVM _script;};
+	if !(_script isEqualTo "")then{execVM _script;};
 	if(_addcolours)then{_servername call HALV_playeraddcolours;};
-	Halv_moveMap = nil;Halv_fill_spawn = nil;Halv_near_cityname = nil;Halv_spawn_player = nil;Halv_spawns = nil;HALV_senddeftele = nil;HALV_HALO = nil;HALV_SELECTSPAWN = nil;HALV_fill_gear = nil;HALV_fnc_returnnameandpic = nil;HALV_fill_gear = nil;Halv_ontreedoubleclick = nil;Halv_ontreeselected = nil;HALV_GEAR_TOADD = nil;HALV_player_removelisteditem = nil;HALV_addiweaponwithammo = nil;HALV_fnc_halo = nil;HALV_playeraddcolours = nil;
+	Halv_moveMap = nil;Halv_fill_spawn = nil;Halv_near_cityname = nil;Halv_spawn_player = nil;Halv_spawns = nil;HALV_Center = nil;HALV_senddeftele = nil;HALV_HALO = nil;HALV_SELECTSPAWN = nil;HALV_fill_gear = nil;HALV_fnc_returnnameandpic = nil;HALV_fill_gear = nil;Halv_ontreedoubleclick = nil;Halv_ontreeselected = nil;HALV_GEAR_TOADD = nil;HALV_player_removelisteditem = nil;HALV_addiweaponwithammo = nil;HALV_fnc_halo = nil;HALV_playeraddcolours = nil;
 };
 
 HALV_switch_spawngear = {
@@ -464,7 +465,7 @@ Halv_fill_spawn = {
 	lbClear _ctrl;
 	_pUID = getPlayerUID player;
 	_bodies = [];
-	{if ((!isNull _x) && {(_x getVariable["bodyUID","0"]) == _pUID}) then {_bodies pushBack (getPosATL _x);};}forEach allDead;
+	{if ((!isNull _x) && {(_x getVariable["bodyUID","0"]) isEqualTo _pUID}) then {_bodies pushBack (getPosATL _x);};}forEach allDead;
 	{
 		_pos = _x select 0;
 		_lvl = if(count _x > 1)then{_x select 1}else{0};
@@ -593,19 +594,19 @@ Halv_ontreeselected = {
 	_item = '';
 	_row = (_path select 0);
 	_arr = _geararr select _row;
-	if((typeName (_arr select 0)) == "ARRAY")then{
-		_sel = if(_row isEqualTo 7 && ((typeOf player) == "Epoch_Female_F"))then{1}else{0};
+	if((typeName (_arr select 0)) isEqualTo "ARRAY")then{
+		_sel = if(_row isEqualTo 7 && ((typeOf player) isEqualTo "Epoch_Female_F"))then{1}else{0};
 		_item = (_arr select _sel)select _val;
 	}else{
 		_item = _arr select _val;
 	};
-	if(_item == '')exitWith{};
+	if(_item isEqualTo '')exitWith{};
 	_arr = _item call HALV_fnc_returnnameandpic;
 	_txt = 'Halv Spawn';
-	if ((_arr select 2) != '') then {_txt = _arr select 2;}else{if ((_arr select 0) != '') then {_txt = _arr select 0;};};
+	if !((_arr select 2) isEqualTo '') then {_txt = _arr select 2;}else{if !((_arr select 0) isEqualTo '') then {_txt = _arr select 0;};};
 	['<t align= ''right'' size=''0.4''>'+_txt+'</t>',0.53,0.885 * safezoneH + safezoneY,15,0,0,8407] spawn bis_fnc_dynamicText;
 	_pic = '';
-	if ((_arr select 1) != '') then {_pic = _arr select 1};
+	if !((_arr select 1) isEqualTo '') then {_pic = _arr select 1};
 	if((toLower _pic) in ['','pictureheal','picturepapercar','picturething','picturestaticobject']) exitWith {};
 	['<img align= ''right'' size=''2.4'' image='''+_pic+'''/>',0.54 * safezoneW + safezoneX,0.76 * safezoneH + safezoneY,15,0,0,8406] spawn bis_fnc_dynamicText;
 
@@ -637,12 +638,12 @@ Halv_ontreedoubleclick = {
 		_treectrl tvDelete _path;
 	};
 	_arr = _geararr select _row;
-	if((typeName (_arr select 0)) == "ARRAY")then{
+	if((typeName (_arr select 0)) isEqualTo "ARRAY")then{
 		_item = (_arr select 0)select _value;
 		_max = (_arr select 1);
 		if(_row isEqualTo 7)then{
 			_max = 0;
-			if((typeOf player) == "Epoch_Female_F")then{
+			if((typeOf player) isEqualTo "Epoch_Female_F")then{
 				_item = (_arr select 1)select _value;
 			};
 		};
@@ -724,9 +725,9 @@ HALV_fill_gear = {
 		_ctrl tvAdd [[],_txt];
 		_ctrl tvSetPicture [[_row],_pic];
 		_arr = _x;
-		if((typeName (_x select 0)) == "ARRAY")then{
+		if((typeName (_x select 0)) isEqualTo "ARRAY")then{
 			_arr = _x select 0;
-			if(_row isEqualTo 7 && ((typeOf player) == "Epoch_Female_F"))then{
+			if(_row isEqualTo 7 && ((typeOf player) isEqualTo "Epoch_Female_F"))then{
 				_arr = (_x select 1);
 			};
 		};
@@ -755,7 +756,7 @@ HALV_fill_gear = {
 				_ctrl tvAdd [[_row],format["%1",_namepic select 0]];
 			};
 			if(332350 in getDLCs 2)then{
-				if((toLower(getText(configFile >> "CfgWeapons" >> _x >> 'DLC'))) == 'mark')then{
+				if((toLower(getText(configFile >> "CfgWeapons" >> _x >> 'DLC'))) isEqualTo 'mark')then{
 					_ctrl tvSetValue [[_row,_fi], -3];
 				}else{
 					_ctrl tvSetValue [[_row,_fi], _value];
