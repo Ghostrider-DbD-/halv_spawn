@@ -8,7 +8,7 @@
 #include "spawn_gear_settings.sqf";
 _scriptpath = _this select 0;
 _rspawnw = getMarkerPos "respawn_west";
-_HALV_Center = getMarkerPos "center";
+HALV_Center = getMarkerPos "center";
 // Makes the script start when player is ingame
 waitUntil{!isNil "HALV_senddeftele"};
 waitUntil{!isNil "Epoch_my_GroupUID"};
@@ -68,8 +68,7 @@ Halv_near_cityname = {
 	_textCity
 };
 
-//if(_spawnNearJammer)then{
-if(false)then{
+if(_spawnNearJammer)then{
 	{
 		if((_x getVariable ["BUILD_OWNER", "-1"]) in [getPlayerUID player, Epoch_my_GroupUID])exitWith{//[getPlayerUID player, Epoch_my_GroupUID]
 			_jamvar = getPos _x;
@@ -77,7 +76,7 @@ if(false)then{
 			_name = _jamvar call Halv_near_cityname;
 			Halv_spawns pushBack [_jamvar,6,format["%1 (%2)",_name,localize "STR_HALV_NEAR_JAMMER"]];
 		}; 
-	}forEach (_HALV_Center nearObjects ["PlotPole_EPOCH",_jamarea]);
+	}forEach (HALV_Center nearObjects ["PlotPole_EPOCH",_jamarea]);
 };
 
 if(_spawnNearGroup)then{

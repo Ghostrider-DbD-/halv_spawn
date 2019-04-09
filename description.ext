@@ -1,0 +1,5 @@
+//Add this only if not already present in your description.ext
+#include "addons\halv_spawn\Halv_defines.hpp"
+
+// always add this
+#include "addons\halv_spawn\spawndialog.hpp"

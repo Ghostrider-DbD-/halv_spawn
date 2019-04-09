@@ -32,26 +32,26 @@ Halv_spawns = switch(toLower worldName)do{
 			[20548.4,8888.25]
 		],	//minimal array for 'Panagia', name is found by the script and no donor / lvl requirements to spawn here
 */
-			[[20548.4,8888.25],2],	// 'Panagia'" //donor
+			[[20548.4,8888.25]],	// 'Panagia'" //donor
 			[[20788.2,6733.91]],	// 'Selakano'
-			[[20241.1,11659.6],1],	// 'Chalkeia' //reg
+			[[20241.1,11659.6]],	// 'Chalkeia' //reg
 			[[16786.2,12619.4]],	// 'Pyrgos'
 			[[18111.2,15242.3]],	// 'Charkia'
-			[[21358.5,16361],2],	// 'Kalochori'" //donor
+			[[21358.5,16361]],	// 'Kalochori'" //donor
 			[[23211.4,19957.7]],	// 'Ioannina'
-			[[25696.9,21348.6],2],	// 'Sofia' //donor
+			[[25696.9,21348.6]],	// 'Sofia' //donor
 			[[26990.8,23202.2]],	// 'Molos'
-			[[16278.7,17267.4],1],	// 'Telos' //reg
+			[[16278.7,17267.4]],	// 'Telos' //reg
 			[[14039.2,18730.9]],	// 'Athira'
 			[[14602.8,20791.3]],	// 'Frini'
 			[[9436.79,20304.4]],	// 'Abdera'
-			[[4559.19,21406.7],2],	// 'Oreokastro' //donor
+			[[4559.19,21406.7]],	// 'Oreokastro' //donor
 			[[4040.33,17281.3]],	// 'Agios Konstantinos'
-			[[9275.09,15899.8],1],	// 'Agios Dionysios' //reg
+			[[9275.09,15899.8]],	// 'Agios Dionysios' //reg
 			[[12477.4,14316.7]],	// 'Neochori'
 			[[3529.11,13054.8]],	// 'Kavala'
 			[[9045.54,11960.8]],	// 'Zaros'
-			[[9259.52,8062.07],1]	//'Sfaka' //reg
+			[[9259.52,8062.07]]	//'Sfaka' //reg
 
 		]
 	};
@@ -129,24 +129,57 @@ Halv_spawns = switch(toLower worldName)do{
 			[[2884.57,17167.5],1]	//Vang
 		]
 	};
-	case "australia":{
+	case "tanoa":{
 		[
-			[[17470.4,33464.90],0,"Darwin"],
-			[[37882.1,19902.9],0,"Brisbane"],
-			[[5471.57,18521.3],0,"Perth"],
-			[[22093.7,25537.9],0,"Alice Springs"],
-			[[20772.5,12830.5],0,"Port Lincoln"],
-			[[25223.7,12851.9],0,"Adelaide"],
-			[[31069.2,10465.7],0,"Melbourne"],
-			[[36506.2,12936.5],0,"Sydney"],
-			[[28516.1,35189.4],0,"Weipa"],
-			[[32017.5,29801.8],0,"CairnsWeipa"],
-			[[31111.3,19988.5],0,"Toowoomba"],
-			[[27615.3,16953.2],0,"Broken Hills"],
-			[[35386.5,8526.27],0,"Eden"],
-			[[33097.9,3692.18],0,"Tasmania"]
+
+			[[2516, 12240]],  // Tuvanaka
+			[[10397, 4326]], // Moddergat
+			[[9473, 13052]], // LaRochelle
+			[[13009, 10791]], // Blue Pearl
+			[[11941, 7782]],  // Oumere
+			[[9353, 7427]],  // Plantations			
+			[[6270, 9301]],  // Regina		
+			[[6967, 12233]]  // Nicolet	
 		]
 	};
+	case "lythium":{
+		[
+			[[4263.67,14309.5],0,"Karift"],  //   Karift
+			[[4263.67,9940.22],0,"Mafaraz"],  //   Mafaraz
+			[[5161.21,3183.88],0,"Bernamir"],  //   Bernamair
+			[[8261.17,17563],0,"Kandar"],  	//   Kandar
+			[[14137.1,14253.1],0,"Ramir"],  //   Ramir
+			[[8881.34,12362.2],0,"Kunara"],  //   Kunara
+			[[17780.4,19468.5],0,"Afarat"],  //   Afarat
+			[[17549.4,10166.3],0,"Razbula"],  //   Razbula
+			[[17937.3,15337.1],0,"Zarath"],  //   Zarath
+			[[12972.5,10037],0,"PuestoCrow"],  	//   PuestoCrow
+			[[16230.6,6701.87],0,"Arobster"],  //   Arobster
+			[[8632.09,8400.49],0,"Morut"],  //   Morut
+			[[8978.99,4251.17],0,"Kindul"],  //   Kindul
+			[[12165.7,6774.39],0,"Orcaif"],  //   Orcaif
+			//[[14223.5,3879.85],0,"Iban Base"],  //   Iban Base
+			[[14354.6,738.269],0,"Kinduff Factory"],  //   Kinduff Factory
+			[[18570.6,2287.82],0,"Offar"]  //   Offar
+			//[[10237,12396.3]],  
+			//[[10045.4,17769.8]], 
+			//[[3476.9,15955.9]],  
+			//[[17780.4,19468.5]],  
+			//[[13334.5,8563.35]],  
+			//[[15713.5,14380.5]],  
+			//[[2788.05,10753.2]],  
+			//[[7194.75,5000.93]],  
+			//[[17639.7,6088.34]],
+			//[[10575.8,9284.92]],
+			//[[14325.1,18769.7]],
+			//[[12313.85,1129.99]]
+			//[[210.55,0,20152.5]],  //   debug_box
+			//[[9305.75,0,15320.2]],  //   respawn_north
+			//[[8859.85,0,6356.99]],  //   respawn_south
+			//[[4489.75,0,11967.3]],  //   respawn_west
+			//[[18040.1,0,12909.7]]  	//   respawn_east		
+		]
+	};	
 /* //create new world spawns, use lower case letters only or it will not be detected (only [x,y] needed)
 	case "myworldname":{
 		[

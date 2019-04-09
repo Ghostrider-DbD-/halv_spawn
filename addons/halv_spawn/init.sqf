@@ -17,6 +17,7 @@ if(isServer)then{
 
 //if _deletedefaultteleporters is true, it deletes all default teleporter objects and replaces them with new ones forcing players to select spawn from the dialog
 //if you want to use the default teleporters instead, set this to false ... however the default teleporters will always have the default teleport scroll action attached
+	//_deletedefaultteleporters = true;
 	_deletedefaultteleporters = false;
 //new teleporter object, this is if you want a diffrent object than the default console i set
 	_newteleClass = "Land_InfoStand_V2_F";
@@ -64,10 +65,11 @@ if(isServer)then{
 	_deftelepos = [];
 	{_deftelepos pushBack (_x select 3)}forEach _HALV_deftele;
 	diag_log format["[halv_spawn] waiting for default 'Debug_static_F' to be build in %1 @ (%2) %3",worldName,mapGridPosition _respawnwest,_respawnwest];
-	waitUntil {sleep 1;(count(_respawnwest nearObjects ["Debug_static_F",30]) > 0)};
-	if(count _HALV_deftele > 0)then{waitUntil {sleep 1;((count(_respawnwest nearObjects ["Transport_EPOCH", 35])) isEqualTo (count _HALV_deftele))};};
-	_objects = _respawnwest nearObjects ["Transport_EPOCH", 35];
-	_box = nearestObject [_respawnwest, "Debug_static_F"];
+	waitUntil {sleep 1;(count(_respawnwest nearObjects ["Debug_static_F",300]) > 0)};
+	if(count _HALV_deftele > 0)then{waitUntil {sleep 1;((count(_respawnwest nearObjects ["Transport_EPOCH", 350])) isEqualTo (count _HALV_deftele))};};
+	_objects = _respawnwest nearObjects ["Transport_EPOCH", 350];
+	_box = nearestObjects [_respawnwest, ["Debug_static_F"],300];
+	diag_log format["[Halv_spawn] _box = %1 | _objects = %2",_box,_objects];
 	_teleobjs = [];
 	if(count _objects > 0)then{
 		diag_log format["[halv_spawn] found some default teleporters ... _deletedefaultteleporters: '%1'",_deletedefaultteleporters];
@@ -84,6 +86,7 @@ if(isServer)then{
 					default{_obj setDir _dir;};
 				};
 				_obj setPosATL _pos;
+				_obj setVectorUp [0,0,1];
 				if !(_objecttexture isEqualTo "")then{{_obj setObjectTextureGlobal [_x,_objecttexture];}forEach _objecttexturesides;};
 				_teleobjs pushBack _obj;
 			}else{
@@ -99,6 +102,7 @@ if(isServer)then{
 			_obj = createVehicle [_newteleClass,_rpos,[], 0, "CAN_COLLIDE"];
 			_obj setDir _rDir;
 			_obj setPos _rpos;
+			_obj setVectorUp [0,0,1];			
 			if !(_objecttexture isEqualTo "")then{{_obj setObjectTextureGlobal [_x,_objecttexture];}forEach _objecttexturesides;};
 			_teleobjs pushBack _obj;
 		}forEach[[[-0.337891,8.4668,-10.3362],0],[[14.6621,0.367188,-10.3362],90],[[-15.4375,0.166016,-10.3362],270]];
