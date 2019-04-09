@@ -20,10 +20,11 @@ _HALV_forcespawnMode = 0;
 _jumpheight = 1000;
 
 //this is the distance (in meters) it will check for the players dead bodys, set to -1 to disable
+// default 2500
 _bodyCheckDist = -1;
 
 //execVM script (like credits) on spawn? "pathto\script\filename.sqf" or "" to disable
-//_script = "addons\halv_spawn\credits.sqf";
+_script = "addons\halv_spawn\credits.sqf";
 
 //start screen 0 = start on select gear screen, anything else will start it on select map screen
 _halv_spawn_startmode = 0;
@@ -49,5 +50,5 @@ _addmap = true;
 //if true adds paintshop colours on spawn, if below var is set correct as in your paintshop settings
 _addcolours = true;
 //set this the same as you have in your paintshop settings or it will not work
-_servername = "GRGAltis";
+_servername = "Your Server Name Here";
 //////////////////////////paintshop settings//////////////////////////
