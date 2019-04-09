@@ -1,5 +1,5 @@
-Please refer to the original post for basic installation.
-
+Please refer to the original post for detailed installation instructions and configuration.
+https://epochmod.com/forum/topic/34896-custom-spawn-dialog-with-gear-halo-selection-moving-map-credits-custom-spawns-and-more/
 Basically, just merge the contents of the init.sqf and description.ext provided.
 
 *** Please Note ***
