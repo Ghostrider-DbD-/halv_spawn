@@ -2,7 +2,16 @@ Please refer to the original post for detailed installation instructions and con
 https://epochmod.com/forum/topic/34896-custom-spawn-dialog-with-gear-halo-selection-moving-map-credits-custom-spawns-and-more/
 Basically, just merge the contents of the init.sqf and description.ext provided.
 
+***AND*** if you use infiSTAR please be sure to note the directions regarding whitelisting the dialogs.
+
 *** Please Note ***
+
+If you use the default Epoch antihack you will be popped up in the sky once or twice unless you disable the teleport checks in epochah.hpp
+antihack_maxTravelDistance = 30; // anti-teleport max travel distance
+antihack_TPcenterDistance = 30; // anti-teleport distance from start
+
+Set these to a value that would not ever be exceeded: 30000;
+
 
 In order to use the spawn booths introduced with Epoch 1.3, you must make the following change 
 (Credit to Grahamme for this work: https://epochmod.com/forum/topic/34896-custom-spawn-dialog-with-gear-halo-selection-moving-map-credits-custom-spawns-and-more/page/30/)
