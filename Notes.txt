@@ -5,6 +5,6 @@ and changes required due to updates to Arma and Epoch.
 The spawn scripts should work out of the box. 
 I have not tested the gear selection scripts for some time; please let me know if you encounter errors.
 
-Note that if you chance anything and it does not work, there may be an error which you can detect by opening
+Note that if you change anything and find that the script does not work, there may be an error which you can detect by opening
 the client .RPT which is stored in appdata\local\Arma3. Check there for any script errors.
 
