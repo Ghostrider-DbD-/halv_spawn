@@ -241,11 +241,14 @@ Halv_spawn_player = {
 	if(_val isEqualTo 1 && !(_pUID in _level1UIDs))exitWith{systemChat localize "STR_HALV_NEEDTOBEREG"};
 	if(_val isEqualTo 2 && !(_pUID in _level2UIDs))exitWith{systemChat localize "STR_HALV_NEEDTOBEDONER"};
 	closeDialog 0;
+
+	/*
 	if(_removedefault)then{
 		removeAllWeapons player;removeAllItems player;removeAllAssignedItems player;
 		{player removeMagazine _x;}count (magazines player);
 		removeUniform player;removeVest player;removeBackpack player;removeGoggles player;removeHeadGear player;
 	};
+	*/
 	if (!(HALV_GEAR_TOADD isEqualTo [[],[],[],[],[],[],[],[],[],[]]) && !(HALV_GEAR_TOADD isEqualTo (profileNamespace getVariable ["HALVSPAWNLASTGEAR",[[],[],[],[],[],[],[],[],[],[]]])))then{
 		profileNamespace setVariable ["HALVSPAWNLASTGEAR",HALV_GEAR_TOADD];
 	};

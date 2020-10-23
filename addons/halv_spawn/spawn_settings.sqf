@@ -37,11 +37,6 @@ _halv_allowgearselect = false;
 //to add random gear from the arrays, set this to true and disable gear selection
 _addgear = false;
 
-//this is to clear all gear, before adding the new gear
-//best to keep this true, if you allow gear selection
-//if you do not allow gear selection, set this to false, or player will start with nothing
-_removedefault = false;
-
 //if true, it will always adds a map to the player on spawn (else player will not have a map, if not added to list)
 _addmap = true;
 

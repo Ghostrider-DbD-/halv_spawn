@@ -6,6 +6,34 @@ Basically, just merge the contents of the init.sqf and description.ext provided.
 
 *** Please Note ***
 
+if you use the feature to add player loadouts, I recommend that you set the default loadout in @epochhive\epochconfig.hpp  so that nothing is added.
+/*
+    Let me know if these settings break Epoch 
+*/
+
+	defaultUniformFemale =		"";
+	defaultVestFemale =			"";
+	defaultUniformMale =		"";  
+	defaultVestMale =			"";
+	defaultGoggles =			"";
+	defaultHeadgear =			"";
+	defaultBackpack =			"";
+	defaultprimaryWeapon[] =	{};		// {"arifle_MX_pointer_F","","acc_pointer_IR","",{"30Rnd_65x39_caseless_mag",29},{},""};
+	defaultsecondaryWeapon[] = 	{};		// {"launch_NLAW_F","","","",{"NLAW_F",1},{},""};
+	defaulthandgunWeapon[] =	{};		// {"hgun_P07_F","","","",{"16Rnd_9x21_Mag",16},{},""};
+	defaultuniformItems[] =		{};
+	defaultvestItems[] =		{;
+	defaultbackpackItems[] =	{};		// {{"Medikit",1},{"FAK",10},{{"hgun_P07_F","","","",{"16Rnd_9x21_Mag",16},{},""},1}};
+	defaultassignedItems[] =	{};		// {"Rangefinder","","","",{},{},""}
+	defaultlinkedItems[] =		{
+		"", 						    // "ItemMap"
+		"", 							// "ItemGPS" or "ItemGeigerCounter_EPOCH",
+		"", 							// "EpochRadio0" through "EpochRadio9"
+		"", 							// "ItemCompass"
+		"", 							// "ItemWatch"
+		""  							// "NVG_EPOCH" or "radiation_mask_epoch"
+	};
+
 If you use the default Epoch antihack you will be popped up in the sky once or twice unless you disable the teleport checks in epochah.hpp
 antihack_maxTravelDistance = 30; // anti-teleport max travel distance
 antihack_TPcenterDistance = 30; // anti-teleport distance from start
